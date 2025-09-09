@@ -1,0 +1,5 @@
+{
+  "from": "noreply@paypal.com",
+  "subject": "You've received a payment of $250.00",
+  "html_content": "<html><body><h2>Payment Received</h2><p>Hi Sarah,</p><p>You've received a payment of $250.00 from John Smith.</p><p>Transaction ID: 1AB23456CD789012E</p><p>Your PayPal email: sarah.payments@business.com</p><p>Contact: +1-888-221-1161</p><footer><p>PayPal, Inc.</p></footer></body></html>"
+}

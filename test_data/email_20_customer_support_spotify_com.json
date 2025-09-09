@@ -1,0 +1,5 @@
+{
+  "from": "customercare@spotify.com",
+  "subject": "Your Spotify Premium subscription issue",
+  "html_content": "<html><body><h2>Subscription Update</h2><p>Hi Music Lover,</p><p>We've resolved the billing issue with your Spotify Premium subscription.</p><p>Your account is now active and ready to use.</p><p>Account email: music.lover@streaming.com</p><p>Subscription: Spotify Premium Family</p><p>Next billing date: December 15, 2024</p><footer><p>Spotify Customer Care</p></footer></body></html>"
+}

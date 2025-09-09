@@ -1,0 +1,149 @@
+# version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+  localstack:
+    image: localstack/localstack:3.0
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=dynamodb
+      - DEBUG=1
+      - DATA_DIR=/var/lib/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - TMPDIR=/var/lib/localstack/tmp
+    volumes:
+      - localstack_data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  chromadb:
+    image: chromadb/chroma
+    container_name: chromadb
+    ports:
+      - "8000:8000"
+    environment:
+      - CHROMADB_DATABASE=demo_db
+      - CHROMADB_DATABASE_PORT=5432
+      - CHROMADB_DATABASE_USER=admin
+      - CHROMADB_DATABASE_PASSWORD=admin123
+      - CHROMADB_DATABASE_NAME=email_embeddings
+    volumes:
+      - chromadb_data:/chroma/chroma
+
+  chromadb-admin:
+    image: fengzhichao/chromadb-admin:latest
+    container_name: chromadb-admin
+    ports:
+      - "3001:3001"
+    depends_on:
+      - chromadb
+    environment:
+      - CHROMA_SERVER_URL=http://chromadb:8000
+
+  dynamodb-admin:
+    image: aaronshaf/dynamodb-admin:latest
+    ports:
+      - "8001:8001"
+    environment:
+      - DYNAMO_ENDPOINT=http://localstack:4566
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+    depends_on:
+      - localstack
+
+
+  app:
+    build: .
+    depends_on:
+      - redis
+      - localstack
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ENDPOINT_URL=http://localstack:4566
+      - DYNAMODB_TABLE_NAME=${DYNAMODB_TABLE_NAME:-email_processing_results}
+      - CHROMA_PERSIST_DIRECTORY=/app/data/chroma
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./test_data:/app/test_data
+    command: python scripts/startup.py test-imports
+
+  celery-worker:
+    build: .
+    depends_on:
+      - redis
+      - localstack
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ENDPOINT_URL=http://localstack:4566
+      - DYNAMODB_TABLE_NAME=${DYNAMODB_TABLE_NAME:-email_processing_results}
+      - CHROMA_PERSIST_DIRECTORY=/app/data/chroma
+      - CHROMADB_HOST=chromadb
+      - CHROMADB_PORT=8000
+      - CHROMADB_USE_EXTERNAL=true
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./test_data:/app/test_data
+    command: celery -A app.celery_app worker --loglevel=info
+
+  celery-flower:
+    build: .
+    depends_on:
+      - redis
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    ports:
+      - "5555:5555"
+    command: celery -A app.celery_app flower
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+
+  go-email-queue:
+    build: ./go-email-queue
+    container_name: go-email-queue
+    depends_on:
+      - redis
+      - localstack
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_QUEUE_NAME=celery
+      - TEST_DATA_DIR=/app/test_data
+    volumes:
+      - ./test_data:/app/test_data:ro
+    restart: "no"
+
+volumes:
+  redis_data:
+  localstack_data:
+  chromadb_data:

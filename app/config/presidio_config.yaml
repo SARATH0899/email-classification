@@ -1,0 +1,105 @@
+nlp_engine_name: spacy
+models:
+  - lang_code: en
+    model_name: en_core_web_sm
+
+ner_model_configuration:
+  model_to_presidio_entity_mapping:
+    PERSON: PERSON
+    PER: PERSON
+    ORG: ORGANIZATION
+    GPE: LOCATION
+    LOC: LOCATION
+    NORP: NRP
+    FACILITY: LOCATION
+    EVENT: EVENT
+    FAC: LOCATION
+    PRODUCT: PRODUCT
+    WORK_OF_ART: PRODUCT
+    LAW: LAW
+    LANGUAGE: LANGUAGE
+    DATE: DATE_TIME
+    TIME: DATE_TIME
+    PERCENT: PERCENT
+    MONEY: MONEY
+    QUANTITY: QUANTITY
+    ORDINAL: ORDINAL
+    CARDINAL: CARDINAL
+
+  low_score_entity_names:
+    - PERSON
+    - ORGANIZATION
+    - LOCATION
+
+  labels_to_ignore:
+    - O
+
+# Custom entity recognizers
+custom_recognizers:
+  - name: EmailRecognizer
+    supported_entities:
+      - EMAIL_ADDRESS
+    patterns:
+      - name: email_pattern
+        regex: '\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        score: 0.9
+
+  - name: PhoneRecognizer
+    supported_entities:
+      - PHONE_NUMBER
+    patterns:
+      - name: us_phone_pattern
+        regex: '\b(?:\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})\b'
+        score: 0.8
+      - name: international_phone_pattern
+        regex: '\+[1-9]\d{1,14}\b'
+        score: 0.7
+
+  - name: CreditCardRecognizer
+    supported_entities:
+      - CREDIT_CARD
+    patterns:
+      - name: visa_pattern
+        regex: '\b4[0-9]{12}(?:[0-9]{3})?\b'
+        score: 0.9
+      - name: mastercard_pattern
+        regex: '\b5[1-5][0-9]{14}\b'
+        score: 0.9
+      - name: amex_pattern
+        regex: '\b3[47][0-9]{13}\b'
+        score: 0.9
+
+# Anonymization settings
+anonymization:
+  default_anonymizers:
+    PERSON: replace
+    EMAIL_ADDRESS: mask
+    PHONE_NUMBER: mask
+    CREDIT_CARD: mask
+    ORGANIZATION: replace
+    LOCATION: replace
+    DATE_TIME: replace
+
+  anonymizer_configs:
+    mask:
+      type: mask
+      masking_char: "*"
+      chars_to_mask: -1
+      from_end: false
+    replace:
+      type: replace
+      new_value: "[REDACTED]"
+    hash:
+      type: hash
+      hash_type: sha256
+
+# Threshold settings
+thresholds:
+  default_score_threshold: 0.35
+  entity_thresholds:
+    EMAIL_ADDRESS: 0.5
+    PHONE_NUMBER: 0.4
+    CREDIT_CARD: 0.8
+    PERSON: 0.5
+    ORGANIZATION: 0.4
+    LOCATION: 0.4

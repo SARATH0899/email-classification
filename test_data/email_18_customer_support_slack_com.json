@@ -1,0 +1,5 @@
+{
+  "from": "help@slack.com",
+  "subject": "Re: Workspace Setup Assistance",
+  "html_content": "<html><body><h2>Workspace Setup Complete</h2><p>Hi Maria,</p><p>Your workspace setup is now complete!</p><ul><li>Team workspace: \"Marketing Team\"</li><li>Admin email: maria.admin@company.co</li><li>Phone verification: +1-212-555-0147</li></ul><p>Your team can now start collaborating!</p><footer><p>Slack Technologies, Inc.</p></footer></body></html>"
+}

@@ -1,0 +1,5 @@
+{
+  "from": "receipts@uber.com",
+  "subject": "Your trip receipt for $18.45",
+  "html_content": "<html><body><h2>Trip Receipt</h2><p>Hi Alex,</p><p>Thanks for riding with Uber!</p><p>Trip fare: $18.45</p><p>Payment method: Card ending in 9876</p><p>Account: alex.rider@email.com</p><p>Phone: +1-555-987-6543</p><footer><p>Uber Technologies, Inc.</p></footer></body></html>"
+}

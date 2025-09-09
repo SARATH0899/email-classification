@@ -1,0 +1,5 @@
+{
+  "from": "billing@stripe.com",
+  "subject": "Payment Receipt - Invoice #inv_1234567890",
+  "html_content": "<html><body><h2>Payment Receipt</h2><p>Hello Emma Wilson,</p><p>Your payment has been successfully processed.</p><p>Invoice ID: #inv_1234567890</p><p>Amount: $99.00</p><p>Payment Method: Visa ending in 1234</p><p>Billing Email: emma.wilson@company.com</p><p>Phone: +1-415-555-7890</p><footer><p>Stripe, Inc.</p></footer></body></html>"
+}

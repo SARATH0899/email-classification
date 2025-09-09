@@ -1,0 +1,5 @@
+{
+  "from": "feedback@airbnb.com",
+  "subject": "How was your stay? Leave a review",
+  "html_content": "<html><body><h2>Rate Your Recent Stay</h2><p>Hi Travel Guest,</p><p>How was your recent stay in San Francisco?</p><p>Your feedback helps other travelers.</p><p>Guest email: travel.guest@vacation.com</p><a href=\"https://airbnb.com/review/12345\">Leave Review</a><footer><p>Airbnb, Inc.</p></footer></body></html>"
+}

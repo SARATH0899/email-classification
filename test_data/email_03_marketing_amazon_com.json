@@ -1,0 +1,5 @@
+{
+  "from": "deals@amazon.com",
+  "subject": "Prime Day Exclusive - Up to 70% Off Electronics",
+  "html_content": "<html><body><h1>Prime Day is Here!</h1><p>Hello Prime Member,</p><p>Exclusive deals just for you! Save up to 70% on electronics.</p><p>Member email: prime.member@email.com</p><p>Member phone: (206) 266-1000</p><a href=\"https://amazon.com/primeday\">Shop Prime Deals</a><footer><p>Amazon.com, Inc.</p><p><a href=\"https://amazon.com/unsubscribe\">Unsubscribe</a></p></footer></body></html>"
+}

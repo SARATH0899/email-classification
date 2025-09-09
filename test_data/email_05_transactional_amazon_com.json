@@ -1,0 +1,5 @@
+{
+  "from": "orders@amazon.com",
+  "subject": "Order Confirmation #AMZ-789456123",
+  "html_content": "<html><body><h2>Order Confirmation</h2><p>Dear Michael Johnson,</p><p>Thank you for your order!</p><table><tr><td>Order Number:</td><td>#AMZ-789456123</td></tr><tr><td>Total Amount:</td><td>$149.99</td></tr><tr><td>Payment Method:</td><td>Credit Card ending in 4532</td></tr></table><p>Customer Email: michael.johnson@email.com</p><p>Phone: (206) 555-0123</p><footer><p>Amazon.com, Inc.</p></footer></body></html>"
+}

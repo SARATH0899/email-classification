@@ -1,0 +1,5 @@
+{
+  "from": "support@github.com",
+  "subject": "Your GitHub issue has been resolved",
+  "html_content": "<html><body><h2>Issue Resolution</h2><p>Hello Developer,</p><p>Your GitHub issue #4567 has been resolved by our team.</p><p>Issue: Repository access permissions</p><p>Resolution: Permissions updated successfully</p><p>Account: developer.coder@tech.com</p><p>If you need further assistance, please reply to this email.</p><footer><p>GitHub Support</p></footer></body></html>"
+}

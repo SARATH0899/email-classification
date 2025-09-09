@@ -1,0 +1,5 @@
+{
+  "from": "feedback@surveymonkey.com",
+  "subject": "Quick 2-minute survey - Help us improve!",
+  "html_content": "<html><body><h2>We Value Your Feedback</h2><p>Hi Alex,</p><p>Please take 2 minutes to share your experience.</p><a href=\"https://surveymonkey.com/r/feedback123\">Take Survey</a><p>Account: alex.feedback@domain.com</p><p>Customer ID: CUST-98765</p><footer><p>SurveyMonkey Inc.</p><p><a href=\"https://surveymonkey.com/unsubscribe\">Unsubscribe</a></p></footer></body></html>"
+}

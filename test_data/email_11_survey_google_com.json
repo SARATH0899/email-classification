@@ -1,0 +1,5 @@
+{
+  "from": "surveys@google.com",
+  "subject": "Google Opinion Rewards - Earn Credits",
+  "html_content": "<html><body><h2>New Survey Available</h2><p>Hello Survey Participant,</p><p>A new survey is available. Complete it to earn Google Play credits!</p><p>Estimated time: 1-2 minutes</p><p>Account: survey.user@gmail.com</p><a href=\"https://surveys.google.com/start\">Start Survey</a><footer><p>Google LLC</p></footer></body></html>"
+}

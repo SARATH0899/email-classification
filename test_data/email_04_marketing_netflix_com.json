@@ -1,0 +1,5 @@
+{
+  "from": "promo@netflix.com",
+  "subject": "New Movies & Shows This Week",
+  "html_content": "<html><body><h2>What's New on Netflix</h2><p>Hi Movie Lover,</p><p>Check out the latest additions to Netflix this week!</p><p>Account: movie.lover@streaming.com</p><a href=\"https://netflix.com/browse\">Watch Now</a><footer><p>Netflix, Inc.</p><p><a href=\"https://netflix.com/unsubscribe\">Unsubscribe</a></p></footer></body></html>"
+}

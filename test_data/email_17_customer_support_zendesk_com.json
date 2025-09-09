@@ -1,0 +1,5 @@
+{
+  "from": "support@zendesk.com",
+  "subject": "Ticket #ZD-12345 - Account Access Issue Resolved",
+  "html_content": "<html><body><h2>Support Ticket Update</h2><p>Dear Robert Chen,</p><p>Good news! Your support ticket has been resolved.</p><p>Ticket ID: #ZD-12345</p><p>Issue: Account Access Problem</p><p>Status: Resolved</p><p>Your account email: robert.chen@business.com</p><p>Phone on file: +1-650-555-0199</p><footer><p>Zendesk Support Team</p></footer></body></html>"
+}
